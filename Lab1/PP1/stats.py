@@ -1,10 +1,8 @@
 # Mean function
-
 def mean (numbers):
   return sum(numbers) / len(numbers)
 
 # Mode function
-
 def mode(numbers):
     frequency = {}
     for num in numbers:
