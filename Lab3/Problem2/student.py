@@ -42,3 +42,23 @@ class Student:
     def __ge__(self, other):
         """Returns True if the current student's name comes after or is equal to the other student's name."""
         return self.name >= other.name
+
+def main():
+    students =
+    [
+        Student("Ken", 5),
+        Student("John", 5),
+        Student("Alice", 5),
+        Student("Bob", 5),
+        Student("Emma", 5)
+    ]
+
+    random.shuffle(students)
+    students.sort()
+
+    for student in students:
+        print(student)
+        print()
+
+if _name_ == "_main_":
+    main()
