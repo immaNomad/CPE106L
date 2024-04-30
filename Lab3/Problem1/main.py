@@ -44,3 +44,47 @@ class Student:
         if isinstance(other, Student):
             return self.name < other.name
         return False
+def main():
+    student1 = Student("John", 5)
+    student2 = Student("Joey", 5)
+    student3 = Student("Mike", 5)
+
+    # Set scores for student1
+    student1.set_score(0, 85)
+    student1.set_score(1, 90)
+    student1.set_score(2, 92)
+    student1.set_score(3, 88)
+    student1.set_score(4, 95)
+
+    # Set scores for student2
+    student2.set_score(0, 80)
+    student2.set_score(1, 82)
+    student2.set_score(2, 78)
+    student2.set_score(3, 85)
+    student2.set_score(4, 90)
+
+    # Equality Test
+    print("Equality Test:")
+    print("student1 == student2:", student1 == student2)
+    print("student1 == student3:", student1 == student3)
+
+    # Less Than Test
+    print("\nLess Than Test:")
+    print("student1 < student2:", student1 < student2)
+    print("student2 < student3:", student2 < student3)
+
+    # Print student info
+    print("\nStudent Info:")
+    print(student1)
+    print(student2)
+
+    # Get average and high score
+    print("\nAverage and High Score:")
+    print("student1 average:", student1.get_average())
+    print("student1 high score:", student1.get_high_score())
+    print("student2 average:", student2.get_average())
+    print("student2 high score:", student2.get_high_score())
+
+
+if name == "main":
+    main()
