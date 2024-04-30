@@ -6,4 +6,4 @@ Jericho Rad V. Balut
 Gaven Anthony P. Tan
 Gian Keanu R. Mauricio
 Ross Abraham G. Morales
-Yuri L. Lozano
+Sebastian Eury L. Lozano
