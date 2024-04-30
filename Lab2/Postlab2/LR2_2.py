@@ -1,12 +1,12 @@
 def navigate_file():
     filename = input("Enter a filename: ")
     try:
-    with open(filename, "r") as file:
-        lines = [line.strip() for line in file.readlines()]
+        with open(filename, "r") as file:
+            lines = [line.strip() for line in file.readlines()]
 
-except FileNotFoundError: 
-    print("File not found. Please try again.")
-    return
+    except FileNotFoundError: 
+        print("File not found. Please try again.")
+        return
 
     num_lines = len(lines)
     print(f"File has {num_lines} lines.")

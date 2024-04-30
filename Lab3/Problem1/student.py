@@ -86,5 +86,5 @@ def main():
     print("student2 high score:", student2.get_high_score())
 
 
-if name == "main":
-    main()
+
+main()

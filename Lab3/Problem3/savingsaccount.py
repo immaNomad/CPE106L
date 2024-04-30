@@ -1,3 +1,5 @@
+class SavingsAccount:
+ 
     # RATE (float): The annual interest rate for all accounts.
 
     RATE = 0.02

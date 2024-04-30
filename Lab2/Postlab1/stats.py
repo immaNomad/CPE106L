@@ -19,7 +19,9 @@ def median(numbers):
         return numbers[n // 2]
     else:
         return (numbers[n // 2 - 1] + numbers[n // 2]) / 2
-numbers = [5, 10, 15, 20, 25]
+    
+# test case
+numbers = [5, 10, 15, 15, 25]
 print("Median:", median(numbers))
 print("Mode:", mode(numbers))
 print("Mean:", mean(numbers))
