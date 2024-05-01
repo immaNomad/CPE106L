@@ -15,3 +15,12 @@ def open_file_dialog():
         return file_path
     else:
         return None
+# Call the function to open the file dialog and get the selected file path
+selected_file = open_file_dialog()
+if selected_file:
+    # You can now use the selected_file variable to access the selected file
+    with open(selected_file, 'r') as file:
+        content = file.read()
+        print("File content:", content)
+else:
+    print("No file selected.")
