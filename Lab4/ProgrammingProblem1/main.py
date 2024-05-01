@@ -57,3 +57,25 @@ class Game:
             if chars == 'XXX' or chars == 'OOO':
                 return True
         return False
+
+def test():
+    game = Game()
+    result = ""
+    while not result:
+        print(game.board)
+        try:
+            result = game.user_move(game._generate_move(game.board))
+        except ValueError:
+            print("Oops, that shouldn't happen")
+        if not result:
+            result = game.computer_move()
+            
+        if not result: continue
+        elif result == 'D':
+            print("Its a draw")
+        else:
+            print("Winner is:", result)
+        print(game.board)
+
+if __name__ == "__main__":
+    test()
