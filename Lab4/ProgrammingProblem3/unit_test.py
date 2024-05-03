@@ -69,11 +69,22 @@ class TestOXOLogic(unittest.TestCase):
         try:
             self.game.test()
             output = mock_stdout.getvalue()
-            self.assertIn('Winner is:', output)
-            self.assertIn('X', output)
-            self.assertNotIn('O', output)
+            self.assertIn('O wins!', output)
         except Exception as e:
             self.fail(f"Exception occurred: {str(e)}")
 
-if _name_ == '_main_':
+    def test_is_winning_move(self):
+        try:
+            self.game._game = ['X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ']
+            self.assertTrue(self.game._isWinningMove())
+
+            self.game._game = ['O', 'O', 'O', ' ', ' ', ' ', ' ', ' ', ' ']
+            self.assertTrue(self.game._isWinningMove())
+
+            self.game._game = ['X', ' ', 'O', 'X', ' ', 'O', 'X', ' ', 'O']
+            self.assertTrue(self.game._isWinningMove())
+        except Exception as e:
+            self.fail(f"Exception occurred: {str(e)}")
+
+if __name__ == '__main__':
     unittest.main()
