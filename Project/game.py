@@ -51,6 +51,38 @@ class CardDeck:
     def get_size(self):
         return len(self.deck)
 
+class Player
+    def __init__(self, name):
+        self.name = name
+        self.play_pile = Pile()
+        self.won_pile = Pile()
+
+    def play_card(self):
+        if self.play_pile.get_size() == 0:
+            self.use_won_pile()
+
+        if self.play_pile.get_size() > 0:
+            return self.play_pile.next_card()
+        return None
+
+    def collect_card(self, card):
+        self.won_pile.add_card(card)
+
+    def collect_cards(self, pile):
+        self.won_pile.add_cards(pile)
+
+    def use_won_pile(self):
+        self.play_pile.clear()
+        self.play_pile.add_cards(self.won_pile)
+        self.won_pile.clear()
+
+    def num_cards(self):
+        return self.play_pile.get_size() + self.won_pile.get_size()
+
+    def get_name(self):
+        return self.name
+
+
 class Game:
     def __init__(self):
         self.p1 = None
