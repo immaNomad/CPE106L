@@ -50,3 +50,77 @@ class CardDeck:
 
     def get_size(self):
         return len(self.deck)
+
+class Game:
+    def __init__(self):
+        self.p1 = None
+        self.p2 = None
+
+    def play(self):
+        cd = CardDeck()
+        cd.shuffle()
+        self.p1 = Player("Ernie")
+        self.p2 = Player("Burt")
+
+        while cd.get_size() >= 2:
+            self.p1.collect_card(cd.deal())
+            self.p2.collect_card(cd.deal())
+
+        self.p1.use_won_pile()
+        self.p2.use_won_pile()
+
+        down = Pile()  # Pile for cards in a war
+
+        for t in range(1, 101):
+            if not self.enough_cards(1):
+                break
+            c1 = self.p1.play_card()
+            c2 = self.p2.play_card()
+
+            print("\nTurn", t, ": ")
+            print(self.p1.get_name() + ": " + str(c1) + " ", end="")
+            print(self.p2.get_name() + ": " + str(c2) + " ", end="")
+
+            if c1 < c2:
+                self.p2.collect_card(c1)
+                self.p2.collect_card(c2)
+            elif c1 > c2:
+                self.p1.collect_card(c1)
+                self.p1.collect_card(c2)
+            else:  # War
+                down.clear()
+                down.add_card(c1)
+                down.add_card(c2)
+
+                done = False
+                while not done:
+                    num = c1.get_rank()
+                    if not self.enough_cards(num):
+                        break
+                    print("\nWar! Players put down", num, "card(s).")
+                    for _ in range(num):
+                        c1 = self.p1.play_card()
+                        c2 = self.p2.play_card()
+                        down.add_card(c1)
+                        down.add_card(c2)
+                        print(self.p1.get_name() + ": " + str(c1) + " ", end="")
+                        print(self.p2.get_name() + ": " + str(c2) + " ", end="")
+                    if c1 < c2:
+                        self.p2.collect_cards(down)
+                        done = True
+                    elif c1 > c2:
+                        self.p1.collect_cards(down)
+                        done = True
+
+        print(self.p1.num_cards(), "to", self.p2.num_cards())
+
+    def enough_cards(self, n):
+        return self.p1.num_cards() >= n and self.p2.num_cards() >= n
+
+    def get_winner(self):
+        if self.p1.num_cards() > self.p2.num_cards():
+            return self.p1
+        elif self.p2.num_cards() > self.p1.num_cards():
+            return self.p2
+        else:
+            return None
