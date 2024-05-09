@@ -29,3 +29,24 @@ class Card:
         rank_names = ["", "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
         suit_names = ["Clubs", "Diamonds", "Hearts", "Spades"]
         return f"{rank_names[self.rank]} of {suit_names[self.suit]}"
+
+class CardDeck:
+    def __init__(self):
+        self.deck = []
+        self.fill()
+
+    def fill(self):
+        for suit in range(4):
+            for rank in range(1, 14):
+                self.deck.append(Card(rank, suit))
+
+    def shuffle(self):
+        random.shuffle(self.deck)
+
+    def deal(self):
+        if len(self.deck) == 0:
+            return None
+        return self.deck.pop()
+
+    def get_size(self):
+        return len(self.deck)
