@@ -7,7 +7,9 @@ CREATE TABLE ADVENTURE_TRIP(
     MAX_GRP_SIZE NUMBER(4, 0),
     TYPE VARCHAR(20),
     SEASON VARCHAR(20)
+    
 );
+
 
 INSERT INTO ADVENTURE_TRIP VALUES(45, 'Jay Peak', 'Jay', 'VT', 8, 8, 'Hiking', 'Summer');
 
