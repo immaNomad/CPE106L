@@ -1,32 +1,49 @@
 import os
-import pyodbc
+import sqlite3
 
 def create_chinook_database():
-    # Read the SQL script from the file
-    with open('database.sql', 'r') as file:
-        sql_code = file.read()
-
-    # Get the connection details from environment variables
-    server = os.getenv('DB_SERVER')
-    database = os.getenv('DB_DATABASE')
-    driver = os.getenv('DB_DRIVER')
-
     # Create the database connection
-    conn_string = (
-        f'DRIVER={driver};'
-        f'SERVER={server};'
-        f'DATABASE={database};'
-        'Trusted_Connection=yes;'
-    )
-    conn = pyodbc.connect(conn_string)
+    conn = sqlite3.connect('chinook.db')
     cursor = conn.cursor()
 
     try:
-        # Execute the SQL script
-        cursor.execute(sql_code)
+        # Create the 'artists' table
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS artists (
+                ArtistID INTEGER PRIMARY KEY,
+                Name TEXT NOT NULL
+            )
+        ''')
+
+        # Create the 'albums' table
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS albums (
+                AlbumId INTEGER PRIMARY KEY,
+                Title TEXT,
+                ArtistId INTEGER,
+                FOREIGN KEY (ArtistId) REFERENCES artists(ArtistID)
+            )
+        ''')
+
+        # Create the 'tracks' table
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS tracks (
+                TrackId INTEGER PRIMARY KEY,
+                Name TEXT,
+                AlbumId INTEGER,
+                MediaTypeId INTEGER,
+                GenreId INTEGER,
+                Composer TEXT,
+                Milliseconds INTEGER,
+                Bytes INTEGER,
+                UnitPrice NUMERIC,
+                FOREIGN KEY (AlbumId) REFERENCES albums(AlbumId)
+            )
+        ''')
+
         conn.commit()
         print("Chinook database created successfully.")
-    except pyodbc.Error as e:
+    except sqlite3.Error as e:
         print(f'Error creating the Chinook database: {e}')
     finally:
         # Close the database connection
