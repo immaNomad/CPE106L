@@ -95,3 +95,31 @@ GO
 
 ALTER DATABASE [chinook] SET READ_WRITE;
 GO
+
+-- Create table 'artists'
+CREATE TABLE [dbo].[ARTISTS] (  -- Use uppercase for table names (optional)
+  [ArtistID] INT NOT NULL PRIMARY KEY,  -- Combine primary key definition
+  [Name] NVARCHAR(120) NOT NULL
+);
+
+-- Create table 'albums'
+CREATE TABLE [dbo].[ALBUMS] (  -- Use uppercase for table names (optional)
+  [AlbumId] INT NOT NULL PRIMARY KEY,  -- Combine primary key definition
+  [Title] NVARCHAR(160) NULL,
+  [ArtistId] INT NOT NULL,
+  FOREIGN KEY (ArtistId) REFERENCES [dbo].[artists] ([ArtistID])  -- Use full table names
+);
+
+-- Create table 'tracks'
+CREATE TABLE [dbo].[TRACKS] (  -- Use uppercase for table names (optional)
+  [TrackId] INT NOT NULL PRIMARY KEY,  -- Combine primary key definition
+  [Name] NVARCHAR(200) NULL,
+  [AlbumId] INT NOT NULL,
+  [MediaTypeId] INT NULL,
+  [GenreId] INT NULL,
+  [Composer] NVARCHAR(220) NULL,
+  [Milliseconds] INT NULL,
+  [Bytes] INT NULL,
+  [UnitPrice] NUMERIC(18, 0) NULL,
+  FOREIGN KEY (AlbumId) REFERENCES [dbo].[albums] ([AlbumId])  -- Use full table names
+);
