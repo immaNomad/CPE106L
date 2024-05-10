@@ -82,6 +82,33 @@ class Player
     def get_name(self):
         return self.name
 
+class Pile:
+    def __init__(self):
+        self.pile = []
+        self.front = 0
+        self.end = 0
+
+    def get_size(self):
+        return self.end - self.front
+
+    def clear(self):
+        self.front = 0
+        self.end = 0
+
+    def add_card(self, card):
+        self.pile.append(card)
+        self.end += 1
+
+    def add_cards(self, pile):
+        while pile.get_size() > 0:
+            self.add_card(pile.next_card())
+
+    def next_card(self):
+        if self.front == self.end:
+            return None
+        card = self.pile[self.front]
+        self.front += 1
+        return card
 
 class Game:
     def __init__(self):
